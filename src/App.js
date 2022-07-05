@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import Carousel from './components/Carousel';
+import Categories from "./components/Categories";
+import Brands from "./components/Brands";
+import TopRatingProducts from './components/TopRatingProducts';
+// import Login from './views/Login';
+import Regis from "./views/Regis";
+import Order from "./views/admin/Order";
+import OrderDetail from "./views/admin/OrderDetail";
+import AdminLogin from './views/admin/AdminLogin';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <AdminLogin/> */}
+      <Order/>
+      {/* <OrderDetail/> */}
     </div>
   );
 }
+
+
 
 export default App;
