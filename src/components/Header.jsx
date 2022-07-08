@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Header() {
     return (
@@ -8,29 +9,19 @@ function Header() {
                 <div className="container-fluid">
                     <div className="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
                         <div className="col-lg-4">
-                            <a href="/" className="text-decoration-none">
+                            <Link to="/" className="text-decoration-none">
                                 <span className="h1 text-uppercase text-primary bg-dark px-2">405</span>
                                 <span className="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
-                            </a>
+                            </Link>
                         </div>
                         <div className="col-lg-4 col-6 text-left">
-                            <form action>
-                                <div className="input-group">
-                                    <input type="text" className="form-control" placeholder="Tìm kiếm" />
-                                    <div className="input-group-append">
-                                        <span className="input-group-text bg-transparent text-primary">
-                                            <i className="fa fa-search" />
-                                        </span>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                         <div className="col-lg-4 col-6 text-right">
                             <div className="btn-group">
                                 <button type="button" className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Tài khoản</button>
                                 <div className="dropdown-menu dropdown-menu-right">
-                                    <a href="dangky.html" className="dropdown-item">Đăng Ký</a>
-                                    <a href="dangnhap.html" className="dropdown-item">Đăng Nhập</a>
+                                    <Link to="/regis" className="dropdown-item">Đăng Ký</Link>
+                                    <Link to="/login" className="dropdown-item">Đăng Nhập</Link>
                                 </div>
                             </div>
                         </div>

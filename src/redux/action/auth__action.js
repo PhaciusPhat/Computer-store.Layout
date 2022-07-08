@@ -9,7 +9,7 @@ export const login__actions = (loginRequest) => {
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("expirationTimestamp", res.data.expirationTimestamp);
             swal("", "Đăng Nhập Thành Công", "success").then(() => {
-                window.location.reload();
+                window.location.assign("/order");
             });
         } catch (error) {
             console.log(error);
@@ -30,6 +30,16 @@ export const regis__actions = (regisRequest) => {
     }
 }
 
+export const admin__logout__action = () => {
+    return async () => {
+        localStorage.clear();
+        window.location.assign("/admin-login");
+    }
+}
+
 export const logout__action = () => {
-    localStorage.clear();
+    return async () => {
+        localStorage.clear();
+        window.location.assign("/login");
+    }
 }

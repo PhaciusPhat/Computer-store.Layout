@@ -16,3 +16,6 @@ export const GET__BRAND = "GET__BRAND";
 
 export const GET__ORDERS = "GET__ORDERS";
 export const GET__ORDER = "GET__ORDER";
+
+export const GET__ACCOUNTS = "GET__ACCOUNTS";
+export const GET__ACCOUNT = "GET__ACCOUNT";
