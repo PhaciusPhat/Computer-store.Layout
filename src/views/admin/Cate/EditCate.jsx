@@ -21,6 +21,7 @@ function AdminEditCate() {
 
 
     const onSubmit = (data) => {
+        data.name = data.name === "" ? category.name : data.name;
         dispatch(update__category__action(id, data));
     };
 
@@ -42,7 +43,6 @@ function AdminEditCate() {
                                 className="form-control"
                                 defaultValue={category.name}
                                 {...register("name", {
-                                    required: true,
                                     maxLength: 30,
                                     minLength: 5
                                 })}

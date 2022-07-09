@@ -21,7 +21,7 @@ function AdminEditBrand() {
 
     const onSubmit = (data) => {
         const formData = new FormData();
-        formData.append('name', data.name);
+        formData.append('name', data.name === "" ? brand.name : data.name);
         formData.append('file', data.file[0]);
         dispatch(update_brand__action(id,formData));
     };
@@ -45,7 +45,6 @@ function AdminEditBrand() {
                                 placeholder="Tên Hãng"
                                 defaultValue={brand.name}
                                 {...register("name", {
-                                    required: true,
                                     maxLength: 30,
                                     minLength: 2
                                 })}

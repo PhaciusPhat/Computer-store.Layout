@@ -1,5 +1,5 @@
 import axios from "axios"
-import { adminUrl } from "../../apis/apiUrl";
+import { adminUrl, publicUrl } from "../../apis/apiUrl";
 import { GET__PRODUCT, GET__PRODUCTS } from "../redux__const";
 
 export const get__products__action = () => {
@@ -86,4 +86,75 @@ export const update_product__action = (id, data) => {
         }
     }
 
+}
+
+export const get__public__product__by__rating__action = () => {
+    return async (dispatch) => {
+        try {
+            const res = await 
+            axios.get(`${publicUrl}product/rating`);
+            dispatch({
+                type: GET__PRODUCTS,
+                payload: res.data
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export const get__public__product__action = (id) => {
+    return async (dispatch) => {
+        try {
+            const res = await axios.get(`${publicUrl}product/detail/${id}`);
+            dispatch({
+                type: GET__PRODUCT,
+                payload: res.data
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export const get__public__products__action = () => {
+    return async (dispatch) => {
+        try {
+            const res = await axios.get(`${publicUrl}product`);
+            dispatch({
+                type: GET__PRODUCTS,
+                payload: res.data
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export const get__public__product__by__cate__action = (id) => {
+    return async (dispatch) => {
+        try {
+            const res = await axios.get(`${publicUrl}product/category/${id}`);
+            dispatch({
+                type: GET__PRODUCTS,
+                payload: res.data
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export const get__public__product__by__brand__action = (id) => {
+    return async (dispatch) => {
+        try {
+            const res = await axios.get(`${publicUrl}product/brand/${id}`);
+            dispatch({
+                type: GET__PRODUCTS,
+                payload: res.data
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }

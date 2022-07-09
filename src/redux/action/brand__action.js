@@ -1,5 +1,5 @@
 import axios from "axios"
-import { adminUrl } from "../../apis/apiUrl";
+import { adminUrl, publicUrl } from "../../apis/apiUrl";
 import { GET__BRAND, GET__BRANDS } from "../redux__const";
 
 export const get__brands__action = () => {
@@ -83,4 +83,18 @@ export const save__brand__action = (data) => {
         }
     }
 
+}
+
+export const get__public__brands__action = () => {
+    return async (dispatch) => {
+        try {
+            const res = await axios.get(`${publicUrl}brand`);
+            dispatch({
+                type: GET__BRANDS,
+                payload: res.data
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }

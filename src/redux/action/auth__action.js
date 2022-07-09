@@ -9,7 +9,7 @@ export const login__actions = (loginRequest) => {
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("expirationTimestamp", res.data.expirationTimestamp);
             swal("", "Đăng Nhập Thành Công", "success").then(() => {
-                window.location.assign("/order");
+                window.location.assign("/");
             });
         } catch (error) {
             console.log(error);

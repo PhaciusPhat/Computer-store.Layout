@@ -12,7 +12,13 @@ import AdminEditBrand from './views/admin/Brand/EditBrand';
 import AdminProduct from './views/admin/product/Product';
 import AdminEditProduct from "./views/admin/product/EditProduct";
 import Protected__route from "./routes/Protected__route";
-
+import Home from "./views/Home";
+import ProductDetail from './views/ProductDetail';
+import Products from "./views/Products";
+import "./asset/style.css"
+import "./asset/bootstrap.min.css"
+import "./asset/bootstrap-grid.min.css"
+import "./asset/bootstrap-reboot.min.css"
 function App() {
   return (
     <>
@@ -23,9 +29,11 @@ function App() {
             <AdminLogin />} />
           <Route path="/regis" element={
             <Regis />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/public/product/:id" element={<ProductDetail />} />
+          <Route path="/public/product" element={<Products />} />
           <Route element={<Protected__route />}>
             {/* client */}
-
 
 
             {/* admin */}
@@ -58,3 +66,5 @@ function App() {
 
 
 export default App;
+
+

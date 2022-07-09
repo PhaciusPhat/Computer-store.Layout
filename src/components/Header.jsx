@@ -1,7 +1,49 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { get__account__info__action } from '../redux/action/account__action';
+import { logout__action } from '../redux/action/auth__action';
+import { get__public__brands__action } from '../redux/action/brand__action';
+import { get__public__cate__action } from '../redux/action/category__action';
 
 function Header() {
+    const dispatch = useDispatch();
+    const account =
+        useSelector(state => state.account__reducer.localAccount);
+    const categories = useSelector(state => state.category__reducer.categories)
+    useEffect(() => {
+        dispatch(get__public__cate__action())
+        dispatch(get__public__brands__action())
+        const token = localStorage.getItem("token");
+        if (token) {
+            dispatch(get__account__info__action());
+        }
+    }, [dispatch]);
+
+    const renderDropdown = () => {
+        if (account.username !== undefined) {
+            return <>
+                <button type="button" className="btn btn-sm dropdown-toggle"
+                    data-toggle="dropdown">Xin Chào {account.name}</button>
+                <div className="dropdown-menu dropdown-menu-right">
+                    <button onClick={() => {
+                        dispatch(logout__action());
+                    }}
+                        className="dropdown-item">Đăng Xuất</button>
+                </div>
+            </>
+        } else {
+            return <>
+                <button type="button" className="btn btn-sm dropdown-toggle"
+                    data-toggle="dropdown">Đăng nhập</button>
+                <div className="dropdown-menu dropdown-menu-right">
+                    <Link to="/login" className="dropdown-item">Đăng Nhập</Link>
+                    <Link to="/regis" className="dropdown-item">Đăng Ký</Link>
+                </div>
+            </>
+        }
+    }
+
     return (
         <>
             <div>
@@ -18,11 +60,7 @@ function Header() {
                         </div>
                         <div className="col-lg-4 col-6 text-right">
                             <div className="btn-group">
-                                <button type="button" className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Tài khoản</button>
-                                <div className="dropdown-menu dropdown-menu-right">
-                                    <Link to="/regis" className="dropdown-item">Đăng Ký</Link>
-                                    <Link to="/login" className="dropdown-item">Đăng Nhập</Link>
-                                </div>
+                                {renderDropdown()}
                             </div>
                         </div>
                     </div>
@@ -31,22 +69,7 @@ function Header() {
                 {/* Navbar Start */}
                 <div className="container-fluid bg-dark mb-30">
                     <div className="row px-xl-5">
-                        <div className="col-lg-3 d-none d-lg-block">
-                            <a className="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style={{ height: 65, padding: '0 30px' }}>
-                                <h6 className="text-dark m-0"><i className="fa fa-bars mr-2" />Danh mục</h6>
-                                <i className="fa fa-angle-down text-dark" />
-                            </a>
-                            <nav className="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style={{ width: 'calc(100% - 30px)', zIndex: 999 }}>
-                                <div className="navbar-nav w-100">
-                                    <a href className="nav-item nav-link">Điện Thoại</a>
-                                    <a href className="nav-item nav-link">Máy Tính</a>
-                                    <a href className="nav-item nav-link">Bàn Phím</a>
-                                    <a href className="nav-item nav-link">Chuột</a>
-                                    <a href className="nav-item nav-link">Phụ Kiện</a>
-                                </div>
-                            </nav>
-                        </div>
-                        <div className="col-lg-9">
+                        <div className="col-lg-12">
                             <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                                 <a href className="text-decoration-none d-block d-lg-none">
                                     <span className="h1 text-uppercase text-dark bg-light px-2">405</span>
@@ -57,15 +80,13 @@ function Header() {
                                 </button>
                                 <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                                     <div className="navbar-nav mr-auto py-0">
-                                        <a href="trangchu.html" className="nav-item nav-link ">Trang chủ</a>
-                                        <a href="dssanpham.html" className="nav-item nav-link">Sản phẩm</a>
-                                        <a href="dshoadon.html" className="nav-item nav-link">Lịch sử đơn hàng</a>
-                                        <a href="lienhe.html" className="nav-item nav-link">Liên Hệ</a>
+                                        <Link to="/" className="nav-item nav-link ">Trang chủ</Link>
+                                        <Link to="/public/product" className="nav-item nav-link">Sản phẩm</Link>
+                                        {/* <a href="dshoadon.html" className="nav-item nav-link">Lịch sử đơn hàng</a> */}
                                     </div>
                                     <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
                                         <a href="giohang.html" className="btn px-0 ml-3">
                                             <i className="fas fa-shopping-cart text-primary" />
-                                            <span className="badge text-secondary border border-secondary rounded-circle" style={{ paddingBottom: 2 }}>0</span>
                                         </a>
                                     </div>
                                 </div>

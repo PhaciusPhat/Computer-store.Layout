@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { adminUrl } from "../../apis/apiUrl";
+import { adminUrl, publicUrl } from "../../apis/apiUrl";
 import { GET__CATEGORIES, GET__CATEGORY } from './../redux__const';
 
 export const get__categories__action = () => {
@@ -55,7 +55,7 @@ export const update__category__action = (id, data) => {
                         }
                     }
                 );
-            window.location.assign("/cate")    
+            window.location.assign("/cate")
         } catch (error) {
             console.log(error);
         }
@@ -92,7 +92,23 @@ export const save__category__action = (data) => {
                         }
                     }
                 );
-                window.location.reload();
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export const get__public__cate__action = () => {
+    return async (dispatch) => {
+        try {
+            const res = await
+                axios.get(`${publicUrl}category`
+                );
+            dispatch({
+                type: GET__CATEGORIES,
+                payload: res.data
+            });
         } catch (error) {
             console.log(error);
         }
