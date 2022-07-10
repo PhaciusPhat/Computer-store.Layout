@@ -11,7 +11,7 @@ export const add__rating__action = (data) => {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            window.location.assign("/");
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }
@@ -27,7 +27,7 @@ export const delete__rating__action = (id) => {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            window.location.assign("/");
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }

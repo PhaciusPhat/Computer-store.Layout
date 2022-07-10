@@ -82,12 +82,12 @@ function Header() {
                                     <div className="navbar-nav mr-auto py-0">
                                         <Link to="/" className="nav-item nav-link ">Trang chủ</Link>
                                         <Link to="/public/product" className="nav-item nav-link">Sản phẩm</Link>
-                                        {/* <a href="dshoadon.html" className="nav-item nav-link">Lịch sử đơn hàng</a> */}
+                                        <Link to="/public/account" className="nav-item nav-link">Lịch sử đơn hàng</Link>
                                     </div>
                                     <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
-                                        <a href="giohang.html" className="btn px-0 ml-3">
+                                        <Link to="/cart" className="btn px-0 ml-3">
                                             <i className="fas fa-shopping-cart text-primary" />
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </nav>

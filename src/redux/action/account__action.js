@@ -28,8 +28,8 @@ export const get__account__info__action = () => {
 export const get__accounts__action = () => {
     return async (dispatch) => {
         try {
-            if(localStorage.getItem('expirationTimestamp') < Date.now() 
-            || localStorage.getItem('token') === null) {
+            if (localStorage.getItem('expirationTimestamp') < Date.now()
+                || localStorage.getItem('token') === null) {
                 localStorage.clear();
                 swal("", "Đăng Nhập hết hạn", "warning").then(() => {
                     window.location.assign("/login");
@@ -104,6 +104,68 @@ export const save__account__action = (account) => {
                     },
                     data: account
                 })
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export const update__info__acount__action = (account) => {
+    return async () => {
+        try {
+            await axios
+                ({
+                    method: 'patch',
+                    url: `${publicUrl}account/information`,
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    },
+                    data: account
+                })
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export const request__active__account__action = () => {
+    return async () => {
+        try {
+            const res = await axios
+                ({
+                    method: 'post',
+                    url: `${publicUrl}account/request-active`,
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                })
+            console.log(res.data)
+            localStorage.setItem('active-token', res.data)
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export const active__local__account__action = (code) => {
+    return async () => {
+        try {
+            await axios
+                ({
+                    method: 'post',
+                    url: `${publicUrl}account/active`,
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    },
+                    data: {
+                        code: code,
+                        encryptString: localStorage.getItem('active-token')
+                    }
+                })
+            localStorage.removeItem('active-token');
             window.location.reload();
         } catch (error) {
             console.log(error);

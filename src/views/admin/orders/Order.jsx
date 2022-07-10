@@ -31,14 +31,7 @@ function AdminOrder() {
                     <td>{order.accountName}</td>
                     <td>{dateFormat(new Date(order.createdDate))}</td>
                     <td>{priceFormatter(order.total)}</td>
-                    <td>{order.status}</td>
                     <td>
-                        <button onClick={() => approve(order.id)}
-                            className="btn btn-success">
-                            <i className="fas fa-check-circle"></i></button>
-                        <button onClick={() => reject(order.id)} 
-                        className="btn btn-danger">
-                            <i className="fas fa-times-circle"></i></button>
                         <Link
                             to={`/order/${order.id}`}
                             className="btn btn-info">
@@ -62,7 +55,6 @@ function AdminOrder() {
                                     <th>Tên Khách Hàng</th>
                                     <th>Ngày Xuất</th>
                                     <th>Tổng tiền</th>
-                                    <th>Trạng Thái</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>

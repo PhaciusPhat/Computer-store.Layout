@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { priceFormatter } from '../utils/helper';
 import BtnModalRating from '../components/BtnModalRating';
+import { useForm } from 'react-hook-form';
+import { add__cart__action } from './../redux/action/cart__action';
 
 function ProductDetail() {
 
@@ -15,7 +17,7 @@ function ProductDetail() {
         dispatch(get__public__product__action(id));
     }, [dispatch])
 
-    
+
 
     const renderImages = () => {
         return product?.productImages?.map((image, index) => {
@@ -28,6 +30,20 @@ function ProductDetail() {
         })
     }
 
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
+    const onSubmit = (data) => {
+        if (data.number === '' || data.number < 1) {
+            alert('Số lượng phải lớn hơn 0')
+            return;
+        }
+        data.productId = id;
+        dispatch(add__cart__action(data));
+    }
 
     const renderRate = () => {
         return product?.ratingDTOs?.map((rate, index) => {
@@ -84,15 +100,22 @@ function ProductDetail() {
                             <h4 className="font-weight-semi">
                                 Giá: <del>{priceFormatter(product.priceOut)}</del></h4>
                             <h5>Số lượng tồn kho: {product?.quantity}</h5>
-                            <div className="d-flex align-items-center mb-4 pt-2">
+                            <form onSubmit={handleSubmit(onSubmit)}
+                                className="d-flex align-items-center mb-4 pt-2">
                                 <div className="input-group quantity mr-3" style={{ width: 130 }}>
-                                    <input type="number" className="form-control bg-secondary border-0 text-center" name="number" defaultValue={1} />
+                                    <input
+                                        className="form-control 
+                                        border-0 text-center"
+                                        defaultValue={1}
+                                        type="number"
+                                        {...register("number")}
+                                    />
                                 </div>
                                 <button disabled={product?.quantity == 0} name="btn-add-cart" className="btn btn-primary px-3">
                                     <i className="fas fa-shopping-cart" />
                                     {product?.quantity == 0 ? "Hết hàng" : "Thêm vào giỏ hàng"}
                                 </button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

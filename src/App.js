@@ -19,6 +19,9 @@ import "./asset/style.css"
 import "./asset/bootstrap.min.css"
 import "./asset/bootstrap-grid.min.css"
 import "./asset/bootstrap-reboot.min.css"
+import Cart from "./views/Cart";
+import Account from "./views/Account";
+import OrderDetail from "./views/OrderDetail";
 function App() {
   return (
     <>
@@ -32,6 +35,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/public/product/:id" element={<ProductDetail />} />
           <Route path="/public/product" element={<Products />} />
+          <Route path="/cart" element={<Cart/>} />
+          <Route path="/public/account" element={<Account/>}/>
+          <Route path="/public/order/:id" element={<OrderDetail/>}/>
           <Route element={<Protected__route />}>
             {/* client */}
 
