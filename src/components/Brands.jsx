@@ -1,61 +1,36 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { get__public__brands__action } from '../redux/action/brand__action';
+import { get__public__product__by__brand__action } from '../redux/action/product__action';
 function Brands() {
+    const dispatch = useDispatch();
+    const brands = useSelector(state => state.brand__reducer.brands);
+    
+    const productByBrand= (id) => {
+        dispatch(get__public__product__by__brand__action(id))
+    }
+    const renderBrands = () => {
+        return brands?.map((brand, index) => {
+            return <div className="col-md-1" key={index}>
+                <div style={{cursor: 'pointer'}}
+                className="mb-4 box-shadow"
+                onClick={() => {productByBrand(brand.id)}}>
+                    <img className="card-img-top"
+                        src={brand.urlImage} alt="image cap"
+                        style={{ height: "75px", width: "75px" }} />
+                </div>
+            </div>
+        })
+    }
+
     return (
         <>
             {/* Brands Start */}
             <div className="container-fluid pt-5">
-                <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4"><span className="bg-secondary pr-3">Danh mục</span></h2>
+                <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
+                    <span className="bg-secondary pr-3">Thương hiệu</span></h2>
                 <div className="row px-xl-5 pb-3">
-                    <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-                        <a className="text-decoration-none" href>
-                            <div className="cat-item d-flex align-items-center mb-4">
-                                <div className="overflow-hidden" style={{ width: 100, height: 100 }}>
-                                    <img className="img-fluid" src="img/keyboard3.jpg" alt />
-                                </div>
-                                <div className="flex-fill pl-3">
-                                    <h6>Bàn Phím</h6>
-                                    <small className="text-body">100 Products</small>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-                        <a className="text-decoration-none" href>
-                            <div className="cat-item img-zoom d-flex align-items-center mb-4">
-                                <div className="overflow-hidden" style={{ width: 100, height: 100 }}>
-                                    <img className="img-fluid" src="img/mouse2.jpg" alt />
-                                </div>
-                                <div className="flex-fill pl-3">
-                                    <h6>Chuột</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-                        <a className="text-decoration-none" href>
-                            <div className="cat-item img-zoom d-flex align-items-center mb-4">
-                                <div className="overflow-hidden" style={{ width: 100, height: 100 }}>
-                                    <img className="img-fluid" src="img/hphone2.jpg" alt />
-                                </div>
-                                <div className="flex-fill pl-3">
-                                    <h6>Headphone</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
-                        <a className="text-decoration-none" href>
-                            <div className="cat-item img-zoom d-flex align-items-center mb-4">
-                                <div className="overflow-hidden" style={{ width: 100, height: 100 }}>
-                                    <img className="img-fluid" src="img/ephone1.jpeg" alt />
-                                </div>
-                                <div className="flex-fill pl-3">
-                                    <h6>Tai Nghe</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                    {renderBrands()}
                 </div>
             </div>
             {/* Brands End */}

@@ -1,9 +1,10 @@
-import { GET__INFO } from "../redux__const"
+import { GET__ACCOUNT, GET__INFO } from "../redux__const"
+import { GET__ACCOUNTS } from './../redux__const';
 
 const initialState = {
     localAccount: {},
-    Accounts: [],
-    Account: {}
+    accounts: [],
+    account: {}
 }
 
 const account__reducer = (state = initialState, { type, payload }) => {
@@ -11,6 +12,14 @@ const account__reducer = (state = initialState, { type, payload }) => {
 
         case GET__INFO:
             state.localAccount = payload;
+            return { ...state }
+
+        case GET__ACCOUNTS: 
+            state.accounts = payload;
+            return { ...state }
+
+        case GET__ACCOUNT:
+            state.account = payload;
             return { ...state }
 
         default:

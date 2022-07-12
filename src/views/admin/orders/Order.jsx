@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
-import AdminNav from './../../components/AdminNav';
-import AdminHeader from './../../components/AdminHeader';
-import Pagination from './../../components/Pagination';
-import { get__orders__action, approve__order__action, reject__order__action } from './../../redux/action/order__action';
 import { useSelector, useDispatch } from 'react-redux';
-import { dateFormat, priceFormatter } from '../../utils/helper';
+import { Link } from 'react-router-dom';
+import AdminHeader from '../../../components/AdminHeader';
+import AdminNav from '../../../components/AdminNav';
+import Pagination from '../../../components/Pagination';
+import { dateFormat } from '../../../utils/helper';
+import { approve__order__action, get__orders__action, reject__order__action } from './../../../redux/action/order__action';
+import { priceFormatter } from './../../../utils/helper';
 
-function Order() {
+function AdminOrder() {
     const dispatch = useDispatch();
 
     const orders = useSelector(state => state.order__reducer.orders);
@@ -29,17 +31,11 @@ function Order() {
                     <td>{order.accountName}</td>
                     <td>{dateFormat(new Date(order.createdDate))}</td>
                     <td>{priceFormatter(order.total)}</td>
-                    <td>{order.status}</td>
                     <td>
-                        <button onClick={() => approve(order.id)}
-                            className="btn btn-success">
-                            <i className="fas fa-check-circle"></i></button>
-                        <button onClick={() => reject(order.id)} 
-                        className="btn btn-danger">
-                            <i className="fas fa-times-circle"></i></button>
-                        <button
+                        <Link
+                            to={`/order/${order.id}`}
                             className="btn btn-info">
-                            <i className="fas fa-info-circle"></i></button>
+                            <i className="fas fa-info-circle"></i></Link>
                     </td>
                 </tr>
             })
@@ -48,8 +44,8 @@ function Order() {
     return (
         <>
             <AdminHeader />
-            <div className="container-fluid">
-                <div className="row">
+            <div className="container-fluid  p-0">
+                <div className="row p-0 m-0">
                     <AdminNav />
                     <div className="col-lg-10 table-responsive p-0">
                         <table style={{ position: 'relative' }}
@@ -59,7 +55,6 @@ function Order() {
                                     <th>Tên Khách Hàng</th>
                                     <th>Ngày Xuất</th>
                                     <th>Tổng tiền</th>
-                                    <th>Trạng Thái</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
@@ -75,4 +70,4 @@ function Order() {
     )
 }
 
-export default Order
+export default AdminOrder
