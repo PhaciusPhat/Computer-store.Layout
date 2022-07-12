@@ -1,30 +1,27 @@
-import { useDispatch } from 'react-redux';
-import { Outlet } from 'react-router-dom';
-import swal from 'sweetalert';
-
+import { useDispatch } from "react-redux";
+import { Outlet, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 const Protected__route = () => {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const expirationTimestamp = localStorage.getItem("expirationTimestamp");
 
-    const dispatch = useDispatch();
+  const navigate__to__route = () => {
+    if (token != null && Date.now() < expirationTimestamp) {
+      return <Outlet />;
+    } else {
+      swal("", "Bạn chưa đăng nhập", "error").then(() => {
+        navigate("/login");
+      });
+    }
+  };
 
-    const token = localStorage.getItem("token");
-    const expirationTimestamp = localStorage.getItem("expirationTimestamp");
+  // useEffect(() => {
+  //   dispatch(get__info__action());
+  // }, [dispatch]);
 
-    const navigate__to__route = () => {
-        if (token) {
-            return <Outlet />;
-        } else {
-            swal("", "Bạn chưa đăng nhập", "error").then(() => {
-                window.location.assign("/login");
-            });
-        }
-    };
-
-    // useEffect(() => {
-    //   dispatch(get__info__action());
-    // }, [dispatch]);
-
-    return <>{navigate__to__route()}</>;
+  return <>{navigate__to__route()}</>;
 };
 
-export default Protected__route
+export default Protected__route;

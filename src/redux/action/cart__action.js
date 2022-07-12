@@ -1,4 +1,5 @@
 import axios from "axios";
+import { error__handler } from "../../utils/error__handler";
 import { publicUrl } from './../../apis/apiUrl';
 import { GET__CART } from './../redux__const';
 
@@ -15,7 +16,7 @@ export const add__cart__action = (data) => {
                     data: data
                 })
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
@@ -36,7 +37,7 @@ export const delete__cart__action = (id) => {
                 })
                 window.location.reload();
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
@@ -57,7 +58,7 @@ export const get__cart__action = () => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }

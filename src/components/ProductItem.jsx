@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 import { add__cart__action } from '../redux/action/cart__action';
 import { priceFormatter } from '../utils/helper';
 
@@ -16,8 +17,15 @@ function ProductItem(props) {
                         <img className="img-fluid w-100" src={product.urlMainImage} alt />
                         <div className="product-action">
                             <a className="btn btn-outline-dark btn-square"
-                                onClick={() => {dispatch(add__cart__action
-                                ({productId: product.id, number: 1}))}}>
+                                onClick={() => {
+                                    if(product.quantity > 0) {
+                                        dispatch(add__cart__action
+                                            ({productId: product.id, number: 1}))
+                                    }
+                                    else{
+                                        swal("", "Sản phẩm đã hết hàng", "warning");
+                                    }
+                                }}>
                                 <i className="fa fa-shopping-cart" /></a>
                             <Link to={`/public/product/${product.id}`}
                                 className="btn btn-outline-dark btn-square">

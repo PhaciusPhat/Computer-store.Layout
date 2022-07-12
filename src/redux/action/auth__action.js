@@ -1,6 +1,7 @@
 import axios from "axios"
 import swal from "sweetalert";
 import { authUrl } from "../../apis/apiUrl"
+import { error__handler } from "../../utils/error__handler";
 
 export const login__actions = (loginRequest) => {
     return async () => {
@@ -12,7 +13,7 @@ export const login__actions = (loginRequest) => {
                 window.location.assign("/");
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error);
         }
     }
 }
@@ -25,7 +26,7 @@ export const regis__actions = (regisRequest) => {
                 window.location.reload();
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error);
         }
     }
 }

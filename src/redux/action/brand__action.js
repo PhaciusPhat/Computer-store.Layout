@@ -1,5 +1,6 @@
 import axios from "axios"
 import { adminUrl, publicUrl } from "../../apis/apiUrl";
+import { error__handler } from "../../utils/error__handler";
 import { GET__BRAND, GET__BRANDS } from "../redux__const";
 
 export const get__brands__action = () => {
@@ -15,7 +16,7 @@ export const get__brands__action = () => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error);
         }
     }
 }
@@ -33,7 +34,7 @@ export const get__brand__action = (id) => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error);
         }
     }
 }
@@ -48,7 +49,7 @@ export const delete__brand__action = (id) => {
             });
             window.location.reload();
         } catch (error) {
-            console.log(error);
+            error__handler(error);
         }
     }
 
@@ -64,7 +65,7 @@ export const update_brand__action = (id, data) => {
             });
             window.location.assign("/brand");
         } catch (error) {
-            console.log(error);
+            error__handler(error);
         }
     }
 }
@@ -79,7 +80,7 @@ export const save__brand__action = (data) => {
             });
             window.location.reload();
         } catch (error) {
-            console.log(error);
+            error__handler(error);
         }
     }
 
@@ -94,7 +95,7 @@ export const get__public__brands__action = () => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error);
         }
     }
 }

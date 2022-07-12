@@ -1,10 +1,12 @@
 import axios from "axios"
 import { adminUrl, publicUrl } from "../../apis/apiUrl";
+import { error__handler } from './../../utils/error__handler';
 
 
 export const add__rating__action = (data) => {
     return async () => {
         try {
+            
             const res = await axios.post(`${publicUrl}rating`, 
             data, {
                 headers: {
@@ -13,7 +15,7 @@ export const add__rating__action = (data) => {
             });
             window.location.reload();
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
@@ -29,7 +31,7 @@ export const delete__rating__action = (id) => {
             });
             window.location.reload();
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }

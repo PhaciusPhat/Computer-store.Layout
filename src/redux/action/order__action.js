@@ -2,6 +2,7 @@ import axios from "axios";
 import { adminUrl, publicUrl } from "../../apis/apiUrl";
 import { GET__ORDER, GET__ORDERS } from "../redux__const";
 import swal from "sweetalert";
+import { error__handler } from './../../utils/error__handler';
 
 export const get__orders__action = () => {
   return async (dispatch) => {
@@ -16,7 +17,7 @@ export const get__orders__action = () => {
         payload: res.data,
       });
     } catch (error) {
-      console.log(error);
+      error__handler(error)
     }
   };
 };
@@ -34,7 +35,7 @@ export const approve__order__action = (id) => {
       });
       window.location.reload();
     } catch (error) {
-      console.log(error);
+      error__handler(error)
     }
   };
 };
@@ -51,7 +52,7 @@ export const reject__order__action = (id) => {
       });
       window.location.reload();
     } catch (error) {
-      console.log(error);
+      error__handler(error)
     }
   };
 };
@@ -69,7 +70,7 @@ export const get__order__action = (id) => {
         payload: res.data,
       });
     } catch (error) {
-      console.log(error);
+      error__handler(error)
     }
   };
 };
@@ -87,7 +88,7 @@ export const get__public__orders__action = () => {
         payload: res.data,
       });
     } catch (error) {
-      console.log(error);
+      error__handler(error)
     }
   };
 };
@@ -105,7 +106,7 @@ export const get__public__order__action = (id) => {
         payload: res.data,
       });
     } catch (error) {
-      console.log(error);
+      error__handler(error)
     }
   };
 };
@@ -125,7 +126,7 @@ export const save__order__action = (data) => {
         window.location.assign("/public/account");
       });
     } catch (error) {
-      console.log(error);
+      error__handler(error)
     }
   };
 };

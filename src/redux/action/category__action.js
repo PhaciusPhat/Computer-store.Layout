@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { adminUrl, publicUrl } from "../../apis/apiUrl";
+import { error__handler } from '../../utils/error__handler';
 import { GET__CATEGORIES, GET__CATEGORY } from './../redux__const';
 
 export const get__categories__action = () => {
@@ -18,7 +19,7 @@ export const get__categories__action = () => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
@@ -39,7 +40,7 @@ export const get__category__action = (id) => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
@@ -57,7 +58,7 @@ export const update__category__action = (id, data) => {
                 );
             window.location.assign("/cate")
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
@@ -75,7 +76,7 @@ export const delete__category__action = (id) => {
                 );
             window.location.reload();
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
@@ -94,7 +95,7 @@ export const save__category__action = (data) => {
                 );
             window.location.reload();
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
@@ -110,7 +111,7 @@ export const get__public__cate__action = () => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }

@@ -1,5 +1,6 @@
 import axios from "axios"
 import { adminUrl, publicUrl } from "../../apis/apiUrl";
+import { error__handler } from "../../utils/error__handler";
 import { GET__PRODUCT, GET__PRODUCTS } from "../redux__const";
 
 export const get__products__action = () => {
@@ -15,7 +16,7 @@ export const get__products__action = () => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
@@ -33,7 +34,7 @@ export const get__product__action = (id) => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
@@ -50,7 +51,7 @@ export const delete__product__action = (id) => {
             });
             window.location.reload();
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 
@@ -66,7 +67,7 @@ export const save__product__action = (data) => {
             });
             window.location.reload();
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 
@@ -82,7 +83,7 @@ export const update_product__action = (id, data) => {
             });
             window.location.assign("/product");
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 
@@ -98,7 +99,7 @@ export const get__public__product__by__rating__action = () => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
@@ -112,7 +113,7 @@ export const get__public__product__action = (id) => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
@@ -126,7 +127,7 @@ export const get__public__products__action = () => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
@@ -140,7 +141,7 @@ export const get__public__product__by__cate__action = (id) => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
@@ -154,7 +155,7 @@ export const get__public__product__by__brand__action = (id) => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error);
+            error__handler(error)
         }
     }
 }
