@@ -26,6 +26,7 @@ function AdminOrderDetail() {
                         <img src={orderItem.productUrlMainImage}
                             style={{ width: '50px' }}
                             alt=""  />
+
                     </td>
                     <td>{orderItem.quantity}</td>
                     <td>{priceFormatter(orderItem.price)}</td>
