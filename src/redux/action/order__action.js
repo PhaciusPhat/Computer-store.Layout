@@ -4,9 +4,10 @@ import { GET__ORDER, GET__ORDERS } from "../redux__const";
 import swal from "sweetalert";
 import { error__handler } from './../../utils/error__handler';
 
-export const get__orders__action = () => {
+export const get__orders__action = (page) => {
   return async (dispatch) => {
     try {
+      console.log(page)
       const res = await axios.get(`${adminUrl}order/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
